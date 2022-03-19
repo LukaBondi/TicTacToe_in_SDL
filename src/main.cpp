@@ -2,13 +2,14 @@
 
 int main(int argc, char* argv[]) 
 {
-    game *mGame = new game("Window", 640, 360, 0);
-    while(mGame->isRunning())
+    game* theGame = new game("Window", 640, 360, 0);
+    while(theGame->isRunning())
     {
-        mGame->handleEvents();
-        mGame->update();
-        mGame->render();
+        theGame->handleEvents();
+        theGame->update();
+        theGame->render();
     }
-    mGame->clean();
+    theGame->clean();
+    delete theGame;
     return 0;
 }

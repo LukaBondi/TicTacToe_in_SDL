@@ -1,4 +1,5 @@
 #include "game.h"
+#include "board.h"
 
 game::game(const char* wName, int w, int h, Uint32 flags) 
 {
@@ -19,7 +20,6 @@ game::game(const char* wName, int w, int h, Uint32 flags)
             {
                 std::cout << "Renderer creation success\n";
                 std::cout << "Initiation success\n";
-                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
                 running = true;
             }
             else
@@ -38,6 +38,14 @@ game::game(const char* wName, int w, int h, Uint32 flags)
     {
         std::cout << "SDL init failed\n";
         running = false;
+    }
+
+    if(running) 
+    {
+        // Start loading the game contents if SDL
+        // successfully initializes the its components
+        std::cout << "Initializing game contents\n";
+        gameBoard = new board();
     }
 }
 
@@ -71,7 +79,9 @@ void game::update()
 
 void game::render() 
 {
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
+    gameBoard->render(renderer);
     SDL_RenderPresent(renderer);
 }
 
