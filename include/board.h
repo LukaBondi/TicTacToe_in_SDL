@@ -3,11 +3,18 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include <vector>
 
 class board
 {
 private:
-    int boardState[9] = {0}; // -1 = X, 0 = non, 1 = O
+    bool xTurn = true; // When true, it is X's turn.
+    char winner = 'n';
+    std::vector<std::vector<int8_t>> winStates;
+    std::vector<char> boardState; // X, O, N
+
+    char winCheck() const;
+    
 public:
     board();
     ~board();
